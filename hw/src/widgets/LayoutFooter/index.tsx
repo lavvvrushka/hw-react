@@ -1,7 +1,9 @@
+import './LayoutFooter.css'
+
 function LayoutFooter() {
   return (
-    <footer>
-      <p> HW </p>
+    <footer className="footer">
+      <p className="footer-text">Домашнее задание</p>
     </footer>
   )
 }

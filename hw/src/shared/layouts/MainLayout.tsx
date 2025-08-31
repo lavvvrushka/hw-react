@@ -1,6 +1,7 @@
 import React from 'react'
 import LayoutHeader from '../../widgets/LayoutHeader'
 import LayoutFooter from '../../widgets/LayoutFooter'
+import './MainLayout.css'
 
 type Props = {
   children: React.ReactNode
@@ -8,9 +9,9 @@ type Props = {
 
 function MainLayout({ children }: Props) {
   return (
-    <div >
+    <div className="main-layout">
       <LayoutHeader />
-      <main>{children}</main>
+      <main className="main-content">{children}</main>
       <LayoutFooter />
     </div>
   )

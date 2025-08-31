@@ -1,3 +1,5 @@
+import './PostCard.css'
+
 type Post = {
   id: number
   title: string
@@ -11,10 +13,10 @@ type Props = {
 
 function PostCard({ post }: Props) {
   return (
-    <article>
-      <h2>{post.title}</h2>
-      <p>{post.text}</p>
-      <p>Автор: {post.author}</p>
+    <article className="post-card">
+      <h2 className="post-title">{post.title}</h2>
+      <p className="post-text">{post.text}</p>
+      <p className="post-author">Автор: {post.author}</p>
     </article>
   )
 }

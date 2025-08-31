@@ -10,16 +10,18 @@ type Post = {
 }
 
 const posts: Post[] = [
-  { id: 1, title: 'Пост 1', text: 'Здесь текст', author: 'Автор 1' },
-  { id: 2, title: 'Пост 2', text: 'Тут текст', author: 'Автор 2' },
-  { id: 3, title: 'Пост 3', text: 'Там текст', author: 'Автор 3' },
+  { id: 1, title: 'Мой первый пост', text: 'Это мой первый пост в React приложении! Я изучаю передачу данных через props.', author: 'Студент' },
+  { id: 2, title: 'Изучаю TypeScript', text: 'TypeScript помогает писать более надежный код с типизацией.', author: 'Разработчик' },
+  { id: 3, title: 'Компонентный подход', text: 'React использует компонентный подход для создания пользовательских интерфейсов.', author: 'Программист' },
 ]
 
 function App() {
   return (
-     <MainLayout>
-      <h1>Список постов</h1>
-      <PostList posts={posts} />
+    <MainLayout>
+      <div className="app-container">
+        <h1 className="app-title">Список постов</h1>
+        <PostList posts={posts} />
+      </div>
     </MainLayout>
   )
 }

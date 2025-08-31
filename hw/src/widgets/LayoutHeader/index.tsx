@@ -1,10 +1,13 @@
 import './LayoutHeader.css'
+import ThemeSwitcher from '../../features/ThemeSwitcher/ui/ThemeSwitcher'
 
 function LayoutHeader() {
   return (
     <header className="header">
-      <h1 className="header-title">HomeWork</h1>
-      <p className="header-subtitle">React + TypeScript</p>
+      <div className="header-inner">
+        <h1 className="header-title">HomeWork</h1>
+        <ThemeSwitcher />
+      </div>
     </header>
   )
 }

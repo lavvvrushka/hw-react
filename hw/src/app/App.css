@@ -9,3 +9,14 @@
   text-align: center;
   margin-bottom: 30px;
 }
+
+.app-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+body.dark .app-title {
+  color: #f5f5f5;
+}
+

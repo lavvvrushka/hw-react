@@ -1,3 +1,4 @@
+import React from 'react'
 import PostCard from '../../entities/post/ui/PostCard'
 import './PostList.css'
 
@@ -18,7 +19,9 @@ function PostList({ posts }: Props) {
       <h2 className="post-list-title">Весь список</h2>
       <div className="post-container">
         {posts.map((post) => (
-          <PostCard key={post.id} post={post} />
+          <React.Fragment key={post.id}>
+            <PostCard post={post} />
+          </React.Fragment>
         ))}
       </div>
     </div>

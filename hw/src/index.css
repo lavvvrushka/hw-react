@@ -10,6 +10,50 @@ body {
   color: #333;
 }
 
+body.light {
+  background: #f0eef3;
+}
+
+body.dark {
+  background: #23272f;
+  color: #f5f5f5;
+}
+
 #root {
   min-height: 100vh;
+}
+
+.header, .footer {
+  background: #e6cbd0;
+}
+
+body.dark .header,
+body.dark .footer {
+  background: #2d3440;
+}
+
+.post-card {
+  background: #ede9ea;
+}
+
+body.dark .post-card {
+  background: #2d3440;
+  color: #f5f5f5;
+}
+
+.button {
+  background: #e6cbd0;
+  color: #222;
+}
+
+body.dark .button {
+  background: #3a4152;
+  color: #f5f5f5;
+}
+
+body.dark .post-title,
+body.dark .post-text,
+body.dark .post-author,
+body.dark .footer-text {
+  color: #f5f5f5;
 }

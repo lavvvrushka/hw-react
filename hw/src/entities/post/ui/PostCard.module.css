@@ -1,0 +1,35 @@
+.postCard {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px;
+  background: #ede9ea;
+}
+
+.postTitle {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.postText {
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.postAuthor {
+  color: #999;
+  font-style: italic;
+}
+
+:global(body.dark) .postCard {
+  background: #2d3440;
+  color: #f5f5f5;
+}
+
+:global(body.dark) .postTitle,
+:global(body.dark) .postText,
+:global(body.dark) .postAuthor {
+  color: #f5f5f5;
+}

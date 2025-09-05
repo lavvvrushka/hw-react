@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom'
-import './Modal.css'
+import styles from './Modal.module.css'
 
 type ModalProps = {
   isOpen: boolean
@@ -17,19 +17,19 @@ function Modal({ isOpen, onClose, title, children }: ModalProps) {
   if (!modalRoot) return null
 
   return ReactDOM.createPortal(
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
+    <div className={styles['modal-overlay']} onClick={onClose}>
+      <div className={styles['modal-content']} onClick={(e) => e.stopPropagation()}>
+        <div className={styles['modal-header']}>
           <h2>{title}</h2>
-          <button className="modal-close" onClick={onClose}>
+          <button className={styles['modal-close']} onClick={onClose}>
             ✕
           </button>
         </div>
-        <div className="modal-body">{children}</div>
+        <div className={styles['modal-body']}>{children}</div>
       </div>
     </div>,
     modalRoot
   )
 }
 
-export default Modal
+export { Modal }

@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 .modal-content {
@@ -16,6 +17,7 @@
   border-radius: 8px;
   max-width: 500px;
   width: 90%;
+  color: #333;
 }
 
 .modal-header {
@@ -30,8 +32,18 @@
   border: none;
   font-size: 20px;
   cursor: pointer;
+  color: #333;
 }
 
 .modal-body {
   line-height: 1.6;
+}
+
+:global(body.dark) .modal-content {
+  background-color: #2d3440;
+  color: #f5f5f5;
+}
+
+:global(body.dark) .modal-close {
+  color: #f5f5f5;
 }

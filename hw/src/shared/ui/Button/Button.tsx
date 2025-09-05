@@ -1,4 +1,4 @@
-import './Button.css'
+import styles from './Button.module.css'
 
 type ButtonProps = {
   children: React.ReactNode
@@ -7,10 +7,10 @@ type ButtonProps = {
 
 function Button({ children, onClick }: ButtonProps) {
   return (
-    <button className="button" onClick={onClick}>
+    <button className={styles.button} onClick={onClick}>
       {children}
     </button>
   )
 }
 
-export default Button
+export { Button }

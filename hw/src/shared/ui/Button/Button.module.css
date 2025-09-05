@@ -1,0 +1,16 @@
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px;
+  background: #e6cbd0;
+  color: #222;
+}
+
+/* Темная тема */
+:global(body.dark) .button {
+  background: #3a4152;
+  color: #f5f5f5;
+}

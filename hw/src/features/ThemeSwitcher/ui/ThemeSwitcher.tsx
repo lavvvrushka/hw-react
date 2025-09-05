@@ -1,4 +1,5 @@
-import { useTheme } from '../../../shared/lib/theme/ThemeContext'
+import { useTheme } from '../../../shared/lib/theme/useTheme'
+import styles from './ThemeSwitcher.module.css'
 
 function ThemeSwitcher() {
   const { theme, changeTheme } = useTheme()
@@ -6,17 +7,11 @@ function ThemeSwitcher() {
   return (
     <button 
       onClick={changeTheme}
-      style={{
-        background: 'none',
-        border: 'none',
-        fontSize: '20px',
-        cursor: 'pointer',
-        padding: '5px'
-      }}
+      className={styles['theme-switcher']}
     >
       {theme === 'light' ? '🌙' : '☀️'}
     </button>
   )
 }
 
-export default ThemeSwitcher
+export { ThemeSwitcher }

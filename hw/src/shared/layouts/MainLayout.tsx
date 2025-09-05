@@ -1,6 +1,6 @@
 import React from 'react'
-import LayoutHeader from '../../widgets/LayoutHeader'
-import LayoutFooter from '../../widgets/LayoutFooter'
+import LayoutHeader from '../../widgets/LayoutHeader/LayoutHeader'
+import LayoutFooter from '../../widgets/LayoutFooter/LayoutFooter'
 import './MainLayout.css'
 
 type Props = {

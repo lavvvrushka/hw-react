@@ -1,11 +1,5 @@
-import './PostCard.css'
-
-type Post = {
-  id: number
-  title: string
-  text: string
-  author?: string
-}
+import styles from './PostCard.module.css'
+import { type Post } from '../../../lib/mocks/posts'
 
 type Props = {
   post: Post
@@ -13,10 +7,10 @@ type Props = {
 
 function PostCard({ post }: Props) {
   return (
-    <article className="post-card">
-      <h2 className="post-title">{post.title}</h2>
-      <p className="post-text">{post.text}</p>
-      <p className="post-author">Автор: {post.author}</p>
+    <article className={styles.postCard}>
+      <h2 className={styles.postTitle}>{post.title}</h2>
+      <p className={styles.postText}>{post.text}</p>
+      <p className={styles.postAuthor}>Автор: {post.author}</p>
     </article>
   )
 }

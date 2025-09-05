@@ -1,12 +1,6 @@
 import PostCard from '../../entities/post/ui/PostCard'
+import { type Post } from '../../lib/mocks/posts'
 import './PostList.css'
-
-type Post = {
-  id: number
-  title: string
-  text: string
-  author?: string
-}
 
 type Props = {
   posts: Post[]

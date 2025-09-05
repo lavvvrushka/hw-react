@@ -1,5 +1,3 @@
-import './LayoutFooter.css'
-
 function LayoutFooter() {
   return (
     <footer className="footer">

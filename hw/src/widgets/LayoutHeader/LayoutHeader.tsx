@@ -1,5 +1,3 @@
-import './LayoutHeader.css'
-
 function LayoutHeader() {
   return (
     <header className="header">

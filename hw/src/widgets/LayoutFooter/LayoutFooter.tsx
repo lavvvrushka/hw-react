@@ -1,7 +1,12 @@
-function LayoutFooter() {
+type Props = {
+  footerClassName?: string
+  textClassName?: string
+}
+
+function LayoutFooter({ footerClassName, textClassName }: Props) {
   return (
-    <footer className="footer">
-      <p className="footer-text">Домашнее задание</p>
+    <footer className={footerClassName}>
+      <p className={textClassName}>Домашнее задание</p>
     </footer>
   )
 }

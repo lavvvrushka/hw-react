@@ -1,6 +1,6 @@
 import PostCard from '../../entities/post/ui/PostCard'
 import { type Post } from '../../lib/mocks/posts'
-import './PostList.css'
+import styles from './PostList.module.css'
 
 type Props = {
   posts: Post[]
@@ -8,9 +8,9 @@ type Props = {
 
 function PostList({ posts }: Props) {
   return (
-    <div className="post-list">
-      <h2 className="post-list-title">Весь список</h2>
-      <div className="post-container">
+    <div className={styles.postList}>
+      <h2 className={styles.postListTitle}>Весь список</h2>
+      <div className={styles.postContainer}>
         {posts.map((post) => (
           <PostCard key={post.id} post={post} />
         ))}

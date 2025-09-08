@@ -1,8 +1,14 @@
-function LayoutHeader() {
+type Props = {
+  headerClassName?: string
+  titleClassName?: string
+  subtitleClassName?: string
+}
+
+function LayoutHeader({ headerClassName, titleClassName, subtitleClassName }: Props) {
   return (
-    <header className="header">
-      <h1 className="header-title">HomeWork</h1>
-      <p className="header-subtitle">React + TypeScript</p>
+    <header className={headerClassName}>
+      <h1 className={titleClassName}>HomeWork</h1>
+      <p className={subtitleClassName}>React + TypeScript</p>
     </header>
   )
 }

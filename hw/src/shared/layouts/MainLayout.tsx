@@ -1,7 +1,7 @@
 import React from 'react'
 import LayoutHeader from '../../widgets/LayoutHeader/LayoutHeader'
 import LayoutFooter from '../../widgets/LayoutFooter/LayoutFooter'
-import './MainLayout.css'
+import styles from './MainLayout.module.css'
 
 type Props = {
   children: React.ReactNode
@@ -9,10 +9,14 @@ type Props = {
 
 function MainLayout({ children }: Props) {
   return (
-    <div className="main-layout">
-      <LayoutHeader />
-      <main className="main-content">{children}</main>
-      <LayoutFooter />
+    <div className={styles.mainLayout}>
+      <LayoutHeader
+        headerClassName={styles.header}
+        titleClassName={styles.headerTitle}
+        subtitleClassName={styles.headerSubtitle}
+      />
+      <main className={styles.mainContent}>{children}</main>
+      <LayoutFooter footerClassName={styles.footer} textClassName={styles.footerText} />
     </div>
   )
 }

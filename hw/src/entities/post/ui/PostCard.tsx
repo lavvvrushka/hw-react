@@ -7,12 +7,12 @@ type Props = {
 
 function PostCard({ post }: Props) {
   return (
-    <article className={styles.postCard}>
-      <h2 className={styles.postTitle}>{post.title}</h2>
-      <p className={styles.postText}>{post.text}</p>
-      <p className={styles.postAuthor}>Автор: {post.author}</p>
+    <article className={styles['post-card']}>
+      <h2 className={styles['post-title']}>{post.title}</h2>
+      <p className={styles['post-text']}>{post.text}</p>
+      <p className={styles['post-author']}>Автор: {post.author}</p>
     </article>
   )
 }
 
-export { PostCard }
+export { PostCard }  

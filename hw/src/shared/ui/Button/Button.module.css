@@ -9,7 +9,6 @@
   color: #222;
 }
 
-/* Темная тема */
 :global(body.dark) .button {
   background: #3a4152;
   color: #f5f5f5;

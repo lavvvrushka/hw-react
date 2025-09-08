@@ -20,7 +20,7 @@ function Modal({ isOpen, onClose, title, children }: ModalProps) {
     <div className={styles['modal-overlay']} onClick={onClose}>
       <div className={styles['modal-content']} onClick={(e) => e.stopPropagation()}>
         <div className={styles['modal-header']}>
-          <h2>{title}</h2>
+          <h2 className={styles['modal-title']}>{title}</h2>
           <button className={styles['modal-close']} onClick={onClose}>
             ✕
           </button>

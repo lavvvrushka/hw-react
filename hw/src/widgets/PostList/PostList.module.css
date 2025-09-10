@@ -15,4 +15,10 @@
   gap: 15px;
 }
 
+<<<<<<< HEAD
 
+=======
+:global(body.dark) .post-list-title {
+  color: #f5f5f5;
+}
+>>>>>>> hm-2

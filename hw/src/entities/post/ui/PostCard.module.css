@@ -3,7 +3,7 @@
   border-radius: 8px;
   padding: 15px;
   margin: 10px;
-  background-color: white;
+  background: #ede9ea;
 }
 
 .postTitle {
@@ -21,4 +21,15 @@
 .postAuthor {
   color: #999;
   font-style: italic;
+}
+
+:global(body.dark) .post-card {
+  background: #2d3440;
+  color: #f5f5f5;
+}
+
+:global(body.dark) .post-title,
+:global(body.dark) .post-text,
+:global(body.dark) .post-author {
+  color: #f5f5f5;
 }

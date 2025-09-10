@@ -1,6 +1,11 @@
 import React from 'react'
+<<<<<<< HEAD
 import LayoutHeader from '../../widgets/LayoutHeader/LayoutHeader'
 import LayoutFooter from '../../widgets/LayoutFooter/LayoutFooter'
+=======
+import { LayoutHeader } from '../../widgets/LayoutHeader/LayoutHeader'
+import { LayoutFooter } from '../../widgets/LayoutFooter/LayoutFooter'
+>>>>>>> hm-2
 import styles from './MainLayout.module.css'
 
 type Props = {
@@ -9,6 +14,7 @@ type Props = {
 
 function MainLayout({ children }: Props) {
   return (
+<<<<<<< HEAD
     <div className={styles.mainLayout}>
       <LayoutHeader
         headerClassName={styles.header}
@@ -17,8 +23,14 @@ function MainLayout({ children }: Props) {
       />
       <main className={styles.mainContent}>{children}</main>
       <LayoutFooter footerClassName={styles.footer} textClassName={styles.footerText} />
+=======
+    <div className={styles['main-layout']}>
+      <LayoutHeader />
+      <main className={styles['main-content']}>{children}</main>
+      <LayoutFooter />
+>>>>>>> hm-2
     </div>
   )
 }
 
-export default MainLayout
+export { MainLayout }

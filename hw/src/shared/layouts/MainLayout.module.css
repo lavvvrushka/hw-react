@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 .mainLayout {
+=======
+.main-layout {
+>>>>>>> hm-2
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+<<<<<<< HEAD
 .mainContent {
   flex: 1;
   padding: 20px;
@@ -30,14 +35,58 @@
 .footer {
   background-color: #333;
   color: white;
+=======
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.header {
+  background: #e6cbd0;
+  color: #333;
+  padding: 20px;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-title {
+  font-size: 28px;
+  margin: 0;
+  text-align: left;
+}
+
+.footer {
+  background: #e6cbd0;
+  color: #333;
+>>>>>>> hm-2
   padding: 20px;
   text-align: center;
   margin-top: 30px;
 }
 
+<<<<<<< HEAD
 .footerText {
+=======
+.footer-text {
+>>>>>>> hm-2
   font-size: 16px;
   margin-bottom: 5px;
 }
 
+<<<<<<< HEAD
+=======
+:global(body.dark) .header,
+:global(body.dark) .footer {
+  background: #2d3440;
+  color: #f5f5f5;
+}
+
+:global(body.dark) .footer-text {
+  color: #f5f5f5;
+}
+>>>>>>> hm-2
 

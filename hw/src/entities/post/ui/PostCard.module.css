@@ -6,10 +6,21 @@
   background: #ede9ea;
 }
 
+.post-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-link:hover .post-title {
+  color: #007bff;
+  text-decoration: underline;
+}
+
 .post-title {
   color: #333;
   font-size: 18px;
   margin-bottom: 10px;
+  transition: color 0.2s ease;
 }
 
 .post-text {

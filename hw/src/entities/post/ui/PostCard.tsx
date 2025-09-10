@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styles from './PostCard.module.css'
 import { type Post } from '../../../lib/mocks/posts'
 import { CommentList } from '../../../widgets/CommentList/ui/CommentList'
@@ -8,7 +9,9 @@ function PostCard({ post }: { post: Post }) {
 
   return (
     <article className={styles['post-card']}>
-      <h2 className={styles['post-title']}>{post.title}</h2>
+      <Link to={`/posts/${post.id}`} className={styles['post-link']}>
+        <h2 className={styles['post-title']}>{post.title}</h2>
+      </Link>
       <p className={styles['post-text']}>{post.text}</p>
       <p className={styles['post-author']}>Автор: {post.author}</p>
       <CommentList comments={postComments} />
@@ -16,4 +19,4 @@ function PostCard({ post }: { post: Post }) {
   )
 }
 
-export { PostCard }  
+export { PostCard }

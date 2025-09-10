@@ -1,0 +1,29 @@
+.filter-container {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-label {
+  font-size: 16px;
+  color: #333;
+}
+
+.filter-input {
+  width: 60px;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+:global(body.dark) .filter-label {
+  color: #f5f5f5;
+}
+
+:global(body.dark) .filter-input {
+  background: #2d3440;
+  color: #f5f5f5;
+  border: 1px solid #444;
+}

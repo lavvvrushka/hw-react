@@ -1,64 +1,66 @@
-<<<<<<< HEAD
-import MainLayout from '../shared/layouts/MainLayout'
-import PostList from '../widgets/PostList/PostList'
-import { posts } from '../lib/mocks/posts'
-import styles from './App.module.css'
-=======
 import { useState } from 'react'
 import { MainLayout } from '../shared/layouts/MainLayout'
 import { PostList } from '../widgets/PostList/PostList'
 import { Modal } from '../shared/ui/Modal/Modal'
+import { posts as allPosts } from '../lib/mocks/posts'
+import { PostLengthFilter } from '../features/PostLengthFilter/ui/PostLengthFilter'
+import { filterByLength } from '../features/PostLengthFilter/lib/filterByLength'
+import { withLoading } from '../shared/lib/hoc/withLoading'
 import { Button } from '../shared/ui/Button/Button'
-import { ThemeProvider } from '../shared/lib/theme/ThemeProvider'
-import { posts } from '../lib/mocks/posts'
 import './App.css'
->>>>>>> hm-2
+
+const PostListWithLoading = withLoading(PostList)
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [minLength, setMinLength] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const [searchValue, setSearchValue] = useState(0)
 
-  const openModal = () => {
-    setIsModalOpen(true)
-  }
+  const filteredPosts = filterByLength(allPosts, searchValue)
 
-  const closeModal = () => {
-    setIsModalOpen(false)
+  const handleSearch = () => {
+    setLoading(true)
+    setTimeout(() => {
+      setSearchValue(minLength)
+      setLoading(false)
+    }, 700)
   }
 
   return (
-<<<<<<< HEAD
     <MainLayout>
-      <div className={styles.appContainer}>
-        <h1 className={styles.appTitle}>Список постов</h1>
-        <PostList posts={posts} />
-      </div>
-    </MainLayout>
-=======
-    <ThemeProvider>
-      <MainLayout>
-        <div className="app-container">
-          <h1 className="app-title">Список постов</h1>
-          <div className="app-buttons">
-            <Button onClick={openModal}>
-              О проекте
-            </Button>
-          </div>
-          <PostList posts={posts} />
-          
-          <Modal isOpen={isModalOpen} onClose={closeModal} title="О проекте">
-            <p>Приложение для обчучения</p>
+      <div className="app-container">
+        <h1 className="app-title">Список постов</h1>
+        <div className="app-buttons">
+          <Button onClick={() => setIsModalOpen(true)}>
+            О проекте
+          </Button>
+        </div>
+        <PostLengthFilter value={minLength} onChange={setMinLength} />
+        <Button onClick={handleSearch}>
+          Поиск
+        </Button>
+        <PostListWithLoading posts={filteredPosts} loading={loading} />
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <Modal.Header>О проекте</Modal.Header>
+          <Modal.Body>
+            <p>Приложение для обучения</p>
             <p>Реализованы:</p>
             <ul>
               <li>Список постов</li>
               <li>Переключение светлой и тёмной темы</li>
-              <li>Модальное окно</li>
-              <li>Простые кнопки</li>
+              <li>Модальное окно (compound components)</li>
+              <li>Фильтр по длине заголовка</li>
+              <li>HOC withLoading</li>
+              <li>Комментарии с разворачиванием</li>
             </ul>
-          </Modal>
-        </div>
-      </MainLayout>
-    </ThemeProvider>
->>>>>>> hm-2
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => setIsModalOpen(false)}>Закрыть</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    </MainLayout>
   )
 }
 

@@ -1,21 +1,25 @@
 import { useState } from 'react';
 import { PostList } from '../../widgets/PostList/PostList';
-import { Modal } from '../../shared/ui/Modal/Modal';
 import { PostLengthFilter } from '../../features/PostLengthFilter/ui/PostLengthFilter';
 import { filterByLength } from '../../features/PostLengthFilter/lib/filterByLength';
 import { withLoading } from '../../shared/lib/hoc/withLoading';
 import { Button } from '../../shared/ui/Button/Button';
 import { posts as allPosts } from '../../lib/mocks/posts';
+import { users } from '../../lib/mocks/users';
+import styles from './PostsPage.module.css';
 
 const PostListWithLoading = withLoading(PostList);
 
 export const PostsPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [minLength, setMinLength] = useState(0);
   const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState(0);
+  const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
+  const postsToShow = selectedUserId 
+    ? allPosts.filter(post => post.userId === selectedUserId)
+    : allPosts;
 
-  const filteredPosts = filterByLength(allPosts, searchValue);
+  const filteredPosts = filterByLength(postsToShow, searchValue);
 
   const handleSearch = () => {
     setLoading(true);
@@ -25,40 +29,49 @@ export const PostsPage = () => {
     }, 700);
   };
 
+  const selectedUser = selectedUserId ? users.find(u => u.id === selectedUserId) : null;
+
   return (
     <div className="app-container">
-      <h1 className="app-title">Список постов</h1>
-      <div className="app-buttons">
-        <Button onClick={() => setIsModalOpen(true)}>
-          О проекте
-        </Button>
+      <h1 className="app-title">
+        {selectedUser ? `Посты пользователя ${selectedUser.name}` : 'Все посты'}
+      </h1>
+      <div className={styles.filterContainer}>
+        <label className={styles.filterLabel}>Фильтр по автору:</label>
+        <select 
+          value={selectedUserId || ''} 
+          onChange={(e) => setSelectedUserId(e.target.value ? Number(e.target.value) : null)}
+          className={styles.userSelect}
+        >
+          <option value="">Все пользователи</option>
+          {users.map(user => (
+            <option key={user.id} value={user.id}>
+              {user.name}
+            </option>
+          ))}
+        </select>
+        
+        {selectedUserId && (
+          <Button onClick={() => setSelectedUserId(null)}>
+            Сбросить фильтр
+          </Button>
+        )}
       </div>
+
       <PostLengthFilter value={minLength} onChange={setMinLength} />
       <Button onClick={handleSearch}>
         Поиск
       </Button>
       <PostListWithLoading posts={filteredPosts} loading={loading} />
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <Modal.Header>О проекте</Modal.Header>
-        <Modal.Body>
-          <p>Приложение для обучения React и роутингу</p>
-          <p>Реализованы:</p>
-          <ul>
-            <li>Список постов</li>
-            <li>Роутинг с React Router</li>
-            <li>Навигация между страницами</li>
-            <li>Переключение светлой и тёмной темы</li>
-            <li>Модальное окно (compound components)</li>
-            <li>Фильтр по длине заголовка</li>
-            <li>HOC withLoading</li>
-            <li>Комментарии с разворачиванием</li>
-            <li>Кастомный хук usePosts</li>
-          </ul>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setIsModalOpen(false)}>Закрыть</Button>
-        </Modal.Footer>
-      </Modal>
+      
+      {filteredPosts.length === 0 && (
+        <p className={styles.noPostsMessage}>
+          {selectedUser 
+            ? `У пользователя ${selectedUser.name} нет таких постов` 
+            : 'Посты не найдены'
+          }
+        </p>
+      )}
     </div>
   );
 };

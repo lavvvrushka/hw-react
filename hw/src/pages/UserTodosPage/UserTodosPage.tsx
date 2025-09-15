@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-import { UserTabs } from '../../widgets/UserTabs/UserTabs';
 import { todos } from '../../lib/mocks/todos';
 import styles from './UserTodosPage.module.css';
 
@@ -9,9 +8,6 @@ export const UserTodosPage = () => {
 
   return (
     <div className={styles['todos-container']}>
-      <h1>Задачи пользователя {id}</h1>
-      <UserTabs userId={id!} />
-      
       {userTodos.length > 0 ? (
         <ul className={styles['todos-list']}>
           {userTodos.map(todo => (
@@ -23,7 +19,7 @@ export const UserTodosPage = () => {
           ))}
         </ul>
       ) : (
-        <p>У пользователя {id} пока нет задач</p>
+        <p>У этого пользователя пока нет задач</p>
       )}
     </div>
   );

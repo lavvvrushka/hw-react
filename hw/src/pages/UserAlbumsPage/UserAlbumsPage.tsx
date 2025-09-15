@@ -1,5 +1,4 @@
 import { useParams, Link } from 'react-router-dom';
-import { UserTabs } from '../../widgets/UserTabs/UserTabs';
 import { albums } from '../../lib/mocks/albums';
 import styles from './UserAlbumsPage.module.css';
 
@@ -9,9 +8,6 @@ export const UserAlbumsPage = () => {
 
   return (
     <div className={styles['albums-container']}>
-      <h1>Альбомы пользователя {id}</h1>
-      <UserTabs userId={id!} />
-      
       {userAlbums.length > 0 ? (
         <div className={styles['albums-grid']}>
           {userAlbums.map(album => (
@@ -26,7 +22,7 @@ export const UserAlbumsPage = () => {
           ))}
         </div>
       ) : (
-        <p>У пользователя {id} пока нет альбомов</p>
+        <p>У этого пользователя пока нет альбомов</p>
       )}
     </div>
   );

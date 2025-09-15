@@ -6,6 +6,8 @@ import { UserAlbumsPage } from '../../../pages/UserAlbumsPage/UserAlbumsPage';
 import { AlbumPhotosPage } from '../../../pages/AlbumPhotosPage/AlbumPhotosPage';
 import { UserTodosPage } from '../../../pages/UserTodosPage/UserTodosPage';
 import { UserPostsPage } from '../../../pages/UserPostsPage/UserPostsPage';
+import { UserLayout } from '../../../pages/UserLayout/UserLayout';
+import { AlbumLayout } from '../../../pages/AlbumLayout/AlbumLayout';
 
 const router = createBrowserRouter([
   {
@@ -25,20 +27,32 @@ const router = createBrowserRouter([
         element: <PostDetailPage />
       },
       {
-        path: 'users/:id/albums',
-        element: <UserAlbumsPage />
+        path: 'users/:id',
+        element: <UserLayout />,
+        children: [
+          {
+            path: 'posts',
+            element: <UserPostsPage />
+          },
+          {
+            path: 'albums',
+            element: <UserAlbumsPage />
+          },
+          {
+            path: 'todos',
+            element: <UserTodosPage />
+          }
+        ]
       },
       {
-        path: 'albums/:id/photos',
-        element: <AlbumPhotosPage />
-      },
-      {
-        path: 'users/:id/todos',
-        element: <UserTodosPage />
-      },
-      {
-        path: 'users/:id/posts',
-        element: <UserPostsPage />
+        path: 'albums/:id',
+        element: <AlbumLayout />,
+        children: [
+          {
+            path: 'photos',
+            element: <AlbumPhotosPage />
+          }
+        ]
       }
     ]
   }

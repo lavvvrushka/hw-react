@@ -18,15 +18,11 @@ export const usePosts = (userId?: number): UsePostsReturn => {
       setError(null);
       
       try {
-        // Имитируем асинхронную загрузку данных
         await new Promise(resolve => setTimeout(resolve, 500));
         
         let filteredPosts = allPosts;
-        
-        // Если передан userId, можно добавить фильтрацию по автору или другой логике
-        // Пока возвращаем все посты, так как в текущей структуре нет userId
+      
         if (userId) {
-          // В будущем здесь можно добавить фильтрацию по userId
           filteredPosts = allPosts;
         }
         

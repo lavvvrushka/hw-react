@@ -1,11 +1,11 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import styles from './CommentList.module.css';
 import type { Comment } from '../../../lib/mocks/comments';
 import { Button } from '../../../shared/ui/Button/Button';
 
 export function CommentList({ comments }: { comments: Comment[] }) {
   const [collapsed, setCollapsed] = useState(true);
-  const toggle = useCallback(() => setCollapsed(c => !c), []);
+  const toggle = () => setCollapsed(c => !c);
 
   return (
     <div className={styles['comment-list-container']}>

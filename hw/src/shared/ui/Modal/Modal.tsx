@@ -1,5 +1,8 @@
 import React from 'react';
 import styles from './Modal.module.css';
+import { ModalHeader } from './ModalHeader';
+import { ModalBody } from './ModalBody';
+import { ModalFooter } from './ModalFooter';
 
 export function Modal({ children, isOpen, onClose }: { children: React.ReactNode, isOpen: boolean, onClose: () => void }) {
   if (!isOpen) return null;
@@ -13,14 +16,6 @@ export function Modal({ children, isOpen, onClose }: { children: React.ReactNode
   );
 }
 
-Modal.Header = function ModalHeader({ children }: { children: React.ReactNode }) {
-  return <div className={styles['modal-header']}><span>{children}</span></div>;
-};
-
-Modal.Body = function ModalBody({ children }: { children: React.ReactNode }) {
-  return <div className={styles['modal-body']}>{children}</div>;
-};
-
-Modal.Footer = function ModalFooter({ children }: { children: React.ReactNode }) {
-  return <div style={{ textAlign: 'right', marginTop: 12 }}>{children}</div>;
-};
+Modal.Header = ModalHeader;
+Modal.Body = ModalBody;
+Modal.Footer = ModalFooter;

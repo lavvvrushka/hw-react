@@ -1,12 +1,119 @@
 .button {
-  padding: 10px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
   cursor: pointer;
-  font-size: 16px;
-  margin: 5px;
-  background: #e6cbd0;
-  color: #222;
+  user-select: none;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 4px;
+}
+
+.variant-primary {
+  background-color: #1976d2;
+  color: white;
+}
+
+.variant-primary:hover:not(:disabled) {
+  background-color: #1565c0;
+}
+
+.variant-secondary {
+  background-color: #9c27b0;
+  color: white;
+}
+
+.variant-secondary:hover:not(:disabled) {
+  background-color: #7b1fa2;
+}
+
+.variant-outline {
+  background-color: transparent;
+  border: 1px solid currentColor;
+  color: #1976d2;
+}
+
+.variant-outline:hover:not(:disabled) {
+  background-color: rgba(25, 118, 210, 0.04);
+}
+
+.variant-text {
+  background-color: transparent;
+  color: #1976d2;
+  box-shadow: none;
+}
+
+.variant-text:hover:not(:disabled) {
+  background-color: rgba(25, 118, 210, 0.04);
+}
+
+.size-small {
+  padding: 6px 12px;
+  font-size: 0.8125rem;
+  min-height: 32px;
+}
+
+.size-medium {
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  min-height: 40px;
+}
+
+.size-large {
+  padding: 10px 22px;
+  font-size: 0.9375rem;
+  min-height: 48px;
+}
+
+.button:disabled,
+.button.loading {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.startIcon {
+  display: inline-flex;
+  margin-right: 8px;
+}
+
+.endIcon {
+  display: inline-flex;
+  margin-left: 8px;
+}
+
+.loader {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: currentColor;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.fullWidth {
+  width: 100%;
+  display: flex;
+}
+
+.button:focus-visible {
+  outline: 2px solid #1976d2;
+  outline-offset: 2px;
 }
 
 :global(body.dark) .button {

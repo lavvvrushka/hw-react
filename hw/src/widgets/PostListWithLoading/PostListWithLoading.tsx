@@ -1,4 +1,8 @@
-import { PostList } from '../PostList/PostList'
-import { withLoading } from '../../shared/lib/hoc/withLoading'
+import { PostList, type PostListProps } from '../PostList/PostList';
+import { withLoading } from '../../shared/lib/hoc/withLoading';
 
-export const PostListWithLoading = withLoading(PostList)
+type PostListWithLoadingProps = PostListProps & {
+  loading: boolean;
+};
+
+export const PostListWithLoading = withLoading<PostListWithLoadingProps>(PostList);

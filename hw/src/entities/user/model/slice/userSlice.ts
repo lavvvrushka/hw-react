@@ -30,7 +30,7 @@ const usersAdapter = createEntityAdapter<User>({
   sortComparer: (a, b) => a.name.localeCompare(b.name),
 });
 
-interface UsersState {
+export interface UsersState {
   currentUserId: number | null;
   selectedUserId: number | null;
   loading: boolean;

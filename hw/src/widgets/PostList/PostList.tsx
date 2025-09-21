@@ -22,4 +22,5 @@ function PostList({ posts }: PostListProps) {
   );
 }
 
-export { PostList }
+export { PostList };
+export type { PostListProps };

@@ -18,13 +18,12 @@ export const store = configureStore({
     [usersApi.reducerPath]: usersApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
-      postsApi.middleware,
-      commentsApi.middleware,
-      albumsApi.middleware,
-      todosApi.middleware,
-      usersApi.middleware
-    ),
+    getDefaultMiddleware()
+      .concat(postsApi.middleware)
+      .concat(commentsApi.middleware)
+      .concat(albumsApi.middleware)
+      .concat(todosApi.middleware)
+      .concat(usersApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

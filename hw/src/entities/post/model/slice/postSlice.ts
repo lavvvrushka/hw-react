@@ -13,7 +13,7 @@ const postsAdapter = createEntityAdapter<Post>({
   sortComparer: (a: Post, b: Post) => b.id - a.id,
 });
 
-interface PostsState {
+export interface PostsState {
   selectedPostId: number | null;
   filter: {
     userId?: number;

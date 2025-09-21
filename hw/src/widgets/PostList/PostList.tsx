@@ -1,25 +1,25 @@
-import * as React from 'react'
-import { PostCard } from '../../entities/post/ui/PostCard'
-import { type Post } from '../../lib/mocks/posts'
-import styles from './PostList.module.css'
+import { PostCard } from '../../entities/post/ui/PostCard';
+import styles from './PostList.module.css';
+import type { Post } from '../../entities/post/model/types/post';
 
-type Props = {
-  posts: Post[]
+interface PostListProps {
+  posts: Post[];
 }
 
-function PostList({ posts }: Props) {
+function PostList({ posts }: PostListProps) {
+  if (posts.length === 0) {
+    return <div>Нет постов для отображения</div>;
+  }
+
   return (
     <div className={styles['post-list']}>
-      <h2 className={styles['post-list-title']}>Весь список</h2>
       <div className={styles['post-container']}>
         {posts.map((post) => (
-          <React.Fragment key={post.id}>
-            <PostCard post={post} />
-          </React.Fragment>
+          <PostCard key={post.id} post={post} />
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 export { PostList }

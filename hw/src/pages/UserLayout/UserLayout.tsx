@@ -1,13 +1,18 @@
 import { Outlet, useParams, Link } from 'react-router-dom';
-import { users } from '../../lib/mocks/users';
+import { useGetUserByIdQuery } from '../../entities/user/api/usersApi';
 import styles from './UserLayout.module.css';
 
 export const UserLayout = () => {
   const { id } = useParams<{ id: string }>();
+  const userId = Number(id);
   
-  const user = users.find(u => u.id === Number(id));
+  const { data: user, isLoading, isError } = useGetUserByIdQuery(userId);
   
-  if (!user) {
+  if (isLoading) {
+    return <div className={styles.loading}>Загрузка пользователя...</div>;
+  }
+  
+  if (isError || !user) {
     return <div className={styles.error}>Пользователь не найден</div>;
   }
 

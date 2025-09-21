@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './CommentList.module.css';
-import type { Comment } from '../../../lib/mocks/comments';
 import { Button } from '../../../shared/ui/Button/Button';
+import type { Comment } from '../../../../src/entities/comment/api/commentsApi';
 
 export function CommentList({ comments }: { comments: Comment[] }) {
   const [collapsed, setCollapsed] = useState(true);
@@ -14,8 +14,11 @@ export function CommentList({ comments }: { comments: Comment[] }) {
       </Button>
       {!collapsed && (
         <ul className={styles['comment-list']}>
-          {comments.map(c => (
-            <li key={c.id}>{c.text}</li>
+          {comments.map(comment => (
+            <li key={comment.id} className={styles.comment}>
+              <h4>{comment.name} ({comment.email})</h4>
+              <p>{comment.body}</p>
+            </li>
           ))}
         </ul>
       )}

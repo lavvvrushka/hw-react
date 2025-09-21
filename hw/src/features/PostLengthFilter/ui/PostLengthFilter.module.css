@@ -1,28 +1,38 @@
-.filter-container {
-  margin-bottom: 16px;
+.container {
   display: flex;
   align-items: center;
-  gap: 8px;
 }
 
-.filter-label {
-  font-size: 16px;
-  color: #333;
-}
-
-.filter-input {
-  width: 60px;
-  padding: 4px 8px;
-  border: 1px solid #ccc;
+.input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 14px;
+  width: 100px;
+  margin-right: 10px;
+  background-color: white;
 }
 
-:global(body.dark) .filter-label {
-  color: #f5f5f5;
+.input:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-:global(body.dark) .filter-input {
+/* Remove number input arrows */
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Dark mode styles */
+:global(body.dark) .input {
   background: #2d3440;
   color: #f5f5f5;
   border: 1px solid #444;

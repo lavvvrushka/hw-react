@@ -1,12 +1,14 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import type { User } from '../../../lib/mocks/users';
-import { users } from '../../../lib/mocks/users';
+import { useGetUsersQuery } from '../../../entities/user/api/usersApi';
+import type { User } from '../../../entities/user/model/slice/userSlice';
 
 interface UserContextType {
-  currentUser: User;
+  currentUser: User | null;
   setCurrentUser: (user: User) => void;
   users: User[];
+  isLoading: boolean;
+  isError: boolean;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -16,10 +18,27 @@ interface UserProviderProps {
 }
 
 export const UserProvider = ({ children }: UserProviderProps) => {
-  const [currentUser, setCurrentUser] = useState<User>(users[0]);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const { data: users = [], isLoading, isError } = useGetUsersQuery();
+
+  useEffect(() => {
+    if (users.length > 0 && !currentUser) {
+      setCurrentUser(users[0]);
+    }
+  }, [users, currentUser]);
+
+  const handleSetCurrentUser = (user: User) => {
+    setCurrentUser(user);
+  };
 
   return (
-    <UserContext.Provider value={{ currentUser, setCurrentUser, users }}>
+    <UserContext.Provider value={{ 
+      currentUser, 
+      setCurrentUser: handleSetCurrentUser, 
+      users,
+      isLoading,
+      isError
+    }}>
       {children}
     </UserContext.Provider>
   );
@@ -32,3 +51,6 @@ export const useUser = () => {
   }
   return context;
 };
+
+// eslint-disable-next-line react-refresh/only-export-components
+export default UserProvider;

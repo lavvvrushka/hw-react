@@ -27,7 +27,7 @@ export const usePosts = (userId?: number): UsePostsReturn => {
         }
         
         setPosts(filteredPosts);
-      } catch (err) {
+      } catch (_err) {
         setError('Ошибка при загрузке постов');
       } finally {
         setLoading(false);

@@ -1,77 +1,107 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { PostList } from '../../widgets/PostList/PostList';
 import { PostLengthFilter } from '../../features/PostLengthFilter/ui/PostLengthFilter';
 import { filterByLength } from '../../features/PostLengthFilter/lib/filterByLength';
-import { withLoading } from '../../shared/lib/hoc/withLoading';
+import { useGetPostsQuery } from '../../entities/post/api/postsApi';
+import { useGetUsersQuery } from '../../entities/user/api/usersApi';
 import { Button } from '../../shared/ui/Button/Button';
-import { posts as allPosts } from '../../lib/mocks/posts';
-import { users } from '../../lib/mocks/users';
 import styles from './PostsPage.module.css';
 
-const PostListWithLoading = withLoading(PostList);
-
 export const PostsPage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [minLength, setMinLength] = useState(0);
-  const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState(0);
-  const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
-  const postsToShow = selectedUserId 
-    ? allPosts.filter(post => post.userId === selectedUserId)
-    : allPosts;
-
-  const filteredPosts = filterByLength(postsToShow, searchValue);
-
-  const handleSearch = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setSearchValue(minLength);
-      setLoading(false);
-    }, 700);
+  
+  const { data: posts = [], isLoading: isLoadingPosts, isError: isPostsError } = useGetPostsQuery();
+  const { data: users = [], isLoading: isLoadingUsers, isError: isUsersError } = useGetUsersQuery();
+  
+  const selectedUserId = useMemo(() => {
+    const userId = searchParams.get('userId');
+    return userId ? parseInt(userId, 10) : null;
+  }, [searchParams]);
+  
+  const handleUserChange = (userId: number | null) => {
+    const params = new URLSearchParams(searchParams);
+    if (userId) {
+      params.set('userId', userId.toString());
+    } else {
+      params.delete('userId');
+    }
+    setSearchParams(params);
   };
 
-  const selectedUser = selectedUserId ? users.find(u => u.id === selectedUserId) : null;
+  const postsToShow = useMemo(() => {
+    if (!selectedUserId) return posts;
+    return posts.filter(post => post.userId === selectedUserId);
+  }, [posts, selectedUserId]);
+
+  const filteredPosts = useMemo(() => {
+    return filterByLength(postsToShow, searchValue);
+  }, [postsToShow, searchValue]);
+
+  const handleSearch = () => {
+    setSearchValue(minLength);
+  };
+
+  const selectedUser = useMemo(() => {
+    if (!selectedUserId) return null;
+    return users.find(u => u.id === selectedUserId);
+  }, [users, selectedUserId]);
+
+  if (isLoadingPosts || isLoadingUsers) {
+    return <div>Загрузка данных...</div>;
+  }
+
+  if (isPostsError || isUsersError) {
+    return <div>Ошибка загрузки данных</div>;
+  }
 
   return (
     <div className="app-container">
       <h1 className="app-title">
         {selectedUser ? `Посты пользователя ${selectedUser.name}` : 'Все посты'}
       </h1>
-      <div className={styles.filterContainer}>
-        <label className={styles.filterLabel}>Фильтр по автору:</label>
-        <select 
-          value={selectedUserId || ''} 
-          onChange={(e) => setSelectedUserId(e.target.value ? Number(e.target.value) : null)}
-          className={styles.userSelect}
-        >
-          <option value="">Все пользователи</option>
-          {users.map(user => (
-            <option key={user.id} value={user.id}>
-              {user.name}
-            </option>
-          ))}
-        </select>
-        
-        {selectedUserId && (
-          <Button onClick={() => setSelectedUserId(null)}>
-            Сбросить фильтр
-          </Button>
-        )}
+      <div className={styles.filtersContainer}>
+        <div className={styles.filterSection}>
+          <h3>Фильтры</h3>
+          <div className={styles.filterGroup}>
+            <label className={styles.filterLabel}>Поиск по автору:</label>
+            <select 
+              value={selectedUserId || ''} 
+              onChange={(e) => handleUserChange(e.target.value ? Number(e.target.value) : null)}
+              className={styles.userSelect}
+              disabled={isLoadingPosts || isLoadingUsers}
+            >
+              <option value="">Все пользователи</option>
+              {users.map(user => (
+                <option key={user.id} value={user.id}>
+                  {user.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={styles.filterGroup}>
+            <label className={styles.filterLabel}>Фильтр по длине:</label>
+            <PostLengthFilter 
+              value={minLength}
+              onChange={setMinLength}
+            />
+            <Button onClick={handleSearch}>
+              Применить
+            </Button>
+        </div>
+        </div>
+        <div className={styles.content}>
+          {filteredPosts.length > 0 ? (
+            <PostList posts={filteredPosts} />
+          ) : (
+            <div className={styles.noPostsMessage}>
+              Посты не найдены. Попробуйте изменить параметры фильтрации.
+            </div>
+          )}
+        </div>
       </div>
-
-      <PostLengthFilter value={minLength} onChange={setMinLength} />
-      <Button onClick={handleSearch}>
-        Поиск
-      </Button>
-      <PostListWithLoading posts={filteredPosts} loading={loading} />
-      
-      {filteredPosts.length === 0 && (
-        <p className={styles.noPostsMessage}>
-          {selectedUser 
-            ? `У пользователя ${selectedUser.name} нет таких постов` 
-            : 'Посты не найдены'
-          }
-        </p>
-      )}
     </div>
   );
 };

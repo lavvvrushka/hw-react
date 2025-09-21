@@ -1,6 +1,14 @@
 .userAvatar {
   position: relative;
   display: inline-block;
+  min-width: 120px; /* Ensure consistent width during loading */
+}
+
+.loading {
+  padding: 6px 12px;
+  color: var(--text-secondary, #666);
+  font-style: italic;
+  white-space: nowrap;
 }
 
 .avatarButton {

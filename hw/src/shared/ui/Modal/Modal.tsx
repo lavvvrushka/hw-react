@@ -1,35 +1,21 @@
-import ReactDOM from 'react-dom'
-import styles from './Modal.module.css'
+import React from 'react';
+import styles from './Modal.module.css';
+import { ModalHeader } from './ModalHeader';
+import { ModalBody } from './ModalBody';
+import { ModalFooter } from './ModalFooter';
 
-type ModalProps = {
-  isOpen: boolean
-  onClose: () => void
-  title: string
-  children: React.ReactNode
-}
-
-function Modal({ isOpen, onClose, title, children }: ModalProps) {
-  if (!isOpen) {
-    return null
-  }
-
-  const modalRoot = document.getElementById('modal-root')
-  if (!modalRoot) return null
-
-  return ReactDOM.createPortal(
-    <div className={styles['modal-overlay']} onClick={onClose}>
-      <div className={styles['modal-content']} onClick={(e) => e.stopPropagation()}>
-        <div className={styles['modal-header']}>
-          <h2 className={styles['modal-title']}>{title}</h2>
-          <button className={styles['modal-close']} onClick={onClose}>
-            ✕
-          </button>
-        </div>
-        <div className={styles['modal-body']}>{children}</div>
+export function Modal({ children, isOpen, onClose }: { children: React.ReactNode, isOpen: boolean, onClose: () => void }) {
+  if (!isOpen) return null;
+  return (
+    <div className={styles['modal-overlay']}>
+      <div className={styles['modal-content']}>
+        {children}
+        <button onClick={onClose} className={styles['modal-close']}>X</button>
       </div>
-    </div>,
-    modalRoot
-  )
+    </div>
+  );
 }
 
-export { Modal }
+Modal.Header = ModalHeader;
+Modal.Body = ModalBody;
+Modal.Footer = ModalFooter;

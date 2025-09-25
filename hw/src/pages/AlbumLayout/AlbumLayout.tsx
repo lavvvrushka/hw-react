@@ -1,15 +1,23 @@
 import { Outlet, useParams, Link } from 'react-router-dom';
-import { albums } from '../../lib/mocks/albums';
-import { users } from '../../lib/mocks/users';
+import { useGetAlbumByIdQuery } from '../../entities/album/api/albumsApi';
+import { useGetUserByIdQuery } from '../../entities/user/api/usersApi';
 import styles from './AlbumLayout.module.css';
 
 export const AlbumLayout = () => {
   const { id } = useParams<{ id: string }>();
-  
-  const album = albums.find(a => a.id === Number(id));
-  const user = album ? users.find(u => u.id === album.userId) : null;
-  
-  if (!album || !user) {
+  const albumId = Number(id);
+
+  const { data: album, isLoading: isLoadingAlbum, isError: isAlbumError } =
+    useGetAlbumByIdQuery(albumId);
+
+  const { data: user, isLoading: isLoadingUser, isError: isUserError } =
+    useGetUserByIdQuery(album?.userId ?? 0, { skip: !album });
+
+  if (isLoadingAlbum || isLoadingUser) {
+    return <div className={styles.loading}>Загрузка данных альбома...</div>;
+  }
+
+  if (isAlbumError || isUserError || !album || !user) {
     return <div className={styles.error}>Альбом не найден</div>;
   }
 

@@ -32,11 +32,20 @@ export const AlbumPhotosPage = () => {
         <div className={styles['photos-grid']}>
           {albumPhotos.map(photo => (
             <div key={photo.id} className={styles['photo-card']}>
-              <img 
-                src={photo.thumbnailUrl} 
+              <img
+                src={photo.thumbnailUrl}
                 alt={photo.title}
                 className={styles['photo-image']}
                 loading="lazy"
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  const img = e.currentTarget;
+                  if (img.src !== photo.url) {
+                    img.src = photo.url;
+                  } else {
+                    img.src = `https://picsum.photos/seed/${photo.id}/150/150`;
+                  }
+                }}
               />
               <h3 className={styles['photo-title']}>{photo.title}</h3>
               <p className={styles['photo-info']}>Фото #{photo.id}</p>

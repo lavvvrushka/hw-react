@@ -1,15 +1,20 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../../app/providers/user/UserContext';
+import { UserContext } from '../../../app/providers/user/UserContext';
+import type { User } from '../../../entities/user/model/slice/userSlice';
 import styles from './UserAvatar.module.css';
 
 export const UserAvatar = () => {
-  const { currentUser, setCurrentUser, users, isLoading } = useUser();
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error('UserAvatar must be used within a UserProvider');
+  }
+  const { currentUser, setCurrentUser, users, isLoading } = context;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleUserChange = (userId: number) => {
-    const selectedUser = users.find(user => user.id === userId);
+    const selectedUser = users.find((user: User) => user.id === userId);
     if (selectedUser) {
       setCurrentUser(selectedUser);
       navigate(`/users/${userId}/posts`);
@@ -54,7 +59,7 @@ export const UserAvatar = () => {
           <div className={styles.section}>
             <div className={styles.sectionTitle}>Выбрать пользователя</div>
             {users.length > 0 ? (
-              users.map(user => (
+              users.map((user: User) => (
                 <button
                   key={user.id}
                   className={`${styles.dropdownItem} ${user.id === currentUser?.id ? styles.active : ''}`}

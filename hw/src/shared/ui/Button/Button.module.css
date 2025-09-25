@@ -4,10 +4,10 @@
   justify-content: center;
   position: relative;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px; 
   font-family: inherit;
-  font-weight: 500;
-  line-height: 1.5;
+  font-weight: 500; 
+  line-height: 1.4;
   text-align: center;
   text-decoration: none;
   vertical-align: middle;
@@ -17,7 +17,21 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 4px;
+  margin: 6px;
+  padding: 10px 18px; 
+  font-size: 15px; 
+  background: #e6cbd0; 
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.button:hover:not(:disabled) {
+  background: #d4b5bb; 
+}
+
+.button:active:not(:disabled) {
+  background: #caaab1; 
+  transform: translateY(1px);
 }
 
 .variant-primary {
@@ -112,7 +126,7 @@
 }
 
 .button:focus-visible {
-  outline: 2px solid #1976d2;
+  outline: 2px solid #caaab1; /* pink focus */
   outline-offset: 2px;
 }
 

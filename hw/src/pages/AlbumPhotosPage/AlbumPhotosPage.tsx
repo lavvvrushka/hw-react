@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useGetAlbumByIdQuery } from '../../entities/album/api/albumsApi';
 import { useGetPhotosByAlbumIdQuery } from '../../entities/photo/api/photosApi';
+import { ItemList } from '../../shared/ui/ItemList/ItemList';
 import styles from './AlbumPhotosPage.module.css';
 
 export const AlbumPhotosPage = () => {
@@ -29,20 +30,33 @@ export const AlbumPhotosPage = () => {
       <h1>Фото из альбома "{album.title}"</h1>
       
       {albumPhotos.length > 0 ? (
-        <div className={styles['photos-grid']}>
-          {albumPhotos.map(photo => (
-            <div key={photo.id} className={styles['photo-card']}>
-              <img 
-                src={photo.thumbnailUrl} 
+        <ItemList
+          items={albumPhotos}
+          keyExtractor={(photo) => photo.id}
+          listClassName={styles['photos-grid']}
+          wrapItem={false}
+          renderItem={(photo) => (
+            <div className={styles['photo-card']}>
+              <img
+                src={photo.thumbnailUrl}
                 alt={photo.title}
                 className={styles['photo-image']}
                 loading="lazy"
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  const img = e.currentTarget;
+                  if (img.src !== photo.url) {
+                    img.src = photo.url;
+                  } else {
+                    img.src = `https://picsum.photos/seed/${photo.id}/150/150`;
+                  }
+                }}
               />
               <h3 className={styles['photo-title']}>{photo.title}</h3>
               <p className={styles['photo-info']}>Фото #{photo.id}</p>
             </div>
-          ))}
-        </div>
+          )}
+        />
       ) : (
         <p>В альбоме пока нет фотографий</p>
       )}

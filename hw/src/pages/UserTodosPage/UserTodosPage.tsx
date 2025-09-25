@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useGetTodosByUserIdQuery } from '../../entities/todo/api/todosApi';
 import { useGetUserByIdQuery } from '../../entities/user/api/usersApi';
+import { ItemList } from '../../shared/ui/ItemList/ItemList';
 import styles from './UserTodosPage.module.css';
 
 export const UserTodosPage = () => {
@@ -35,10 +36,13 @@ export const UserTodosPage = () => {
       <h1>Задачи пользователя {user?.name || 'Загрузка...'}</h1>
       
       {userTodos.length > 0 ? (
-        <ul className={styles['todos-list']}>
-          {userTodos.map(todo => (
+        <ItemList
+          items={userTodos}
+          keyExtractor={(todo) => todo.id}
+          listClassName={styles['todos-list']}
+          wrapItem={false}
+          renderItem={(todo) => (
             <li 
-              key={todo.id} 
               className={`${styles['todo-item']} ${todo.completed ? styles.completed : ''}`}
             >
               <input 
@@ -51,8 +55,8 @@ export const UserTodosPage = () => {
                 {todo.title}
               </span>
             </li>
-          ))}
-        </ul>
+          )}
+        />
       ) : (
         <p>У этого пользователя пока нет задач</p>
       )}

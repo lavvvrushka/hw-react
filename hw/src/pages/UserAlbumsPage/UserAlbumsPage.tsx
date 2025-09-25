@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useGetAlbumsByUserIdQuery } from '../../entities/album/api/albumsApi';
 import { useGetUserByIdQuery } from '../../entities/user/api/usersApi';
+import { ItemList } from '../../shared/ui/ItemList/ItemList';
 import styles from './UserAlbumsPage.module.css';
 
 export const UserAlbumsPage = () => {
@@ -33,23 +34,22 @@ export const UserAlbumsPage = () => {
   return (
     <div className={styles['albums-container']}>
       <h1>Альбомы пользователя {user?.name || 'Загрузка...'}</h1>
-      
-      {userAlbums.length > 0 ? (
-        <div className={styles['albums-grid']}>
-          {userAlbums.map(album => (
-            <Link 
-              key={album.id} 
-              to={`/albums/${album.id}/photos`}
-              className={styles['album-card']}
-            >
-              <h3 className={styles['album-title']}>{album.title}</h3>
-              <p className={styles['album-info']}>Альбом #{album.id}</p>
-            </Link>
-          ))}
-        </div>
-      ) : (
-        <p>У этого пользователя пока нет альбомов</p>
-      )}
+      <ItemList
+        items={userAlbums}
+        keyExtractor={(album) => album.id}
+        emptyText="У этого пользователя пока нет альбомов"
+        listClassName={styles['albums-grid']}
+        wrapItem={false}
+        renderItem={(album) => (
+          <Link 
+            to={`/albums/${album.id}/photos`}
+            className={styles['album-card']}
+          >
+            <h3 className={styles['album-title']}>{album.title}</h3>
+            <p className={styles['album-info']}>Альбом #{album.id}</p>
+          </Link>
+        )}
+      />
     </div>
   );
 };

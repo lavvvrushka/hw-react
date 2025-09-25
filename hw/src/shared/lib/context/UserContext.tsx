@@ -31,5 +31,4 @@ export const useUser = () => {
   return context;
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export default UserProvider;

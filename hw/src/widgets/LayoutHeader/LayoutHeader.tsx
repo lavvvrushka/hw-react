@@ -37,9 +37,6 @@ function LayoutHeader() {
             <li>Комментарии с разворачиванием</li>
           </ul>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setIsModalOpen(false)}>Закрыть</Button>
-        </Modal.Footer>
       </Modal>
     </header>
   )

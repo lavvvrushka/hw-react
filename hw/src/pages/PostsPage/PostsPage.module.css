@@ -52,3 +52,29 @@
   border-radius: 8px;
   border: 1px dashed #dee2e6;
 }
+
+:global(body.dark) .filtersContainer {
+  background-color: #2d3440;
+  box-shadow: none;
+  border: 1px solid #555;
+}
+
+:global(body.dark) .filterSection h3 {
+  color: #f5f5f5;
+}
+
+:global(body.dark) .filterLabel {
+  color: #f5f5f5;
+}
+
+:global(body.dark) .userSelect {
+  background-color: #3a4152;
+  color: #f5f5f5;
+  border-color: #555;
+}
+
+:global(body.dark) .noPostsMessage {
+  background-color: #2d3440;
+  color: #f5f5f5;
+  border-color: #555;
+}

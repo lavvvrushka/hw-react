@@ -1,0 +1,82 @@
+.todos-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.todos-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.todo-item {
+  padding: 15px 20px;
+  margin: 12px 0;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.todo-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.todo-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #4a6fa5;
+}
+
+.todo-text {
+  color: #333;
+  font-size: 16px;
+  margin: 0;
+  flex-grow: 1;
+  transition: color 0.2s ease;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: #888;
+}
+
+/* Dark mode styles */
+:global(body.dark) .todo-item {
+  background: #2d3440;
+  border-color: #3a4555;
+}
+
+:global(body.dark) .todo-text {
+  color: #e0e0e0;
+}
+
+:global(body.dark) .todo-item.completed .todo-text {
+  color: #8a94a5;
+}
+
+:global(body.dark) .todo-checkbox {
+  accent-color: #5d8bd8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .todos-container {
+    padding: 15px;
+  }
+  
+  .todo-item {
+    padding: 12px 15px;
+  }
+  
+  .todo-text {
+    font-size: 15px;
+  }
+}

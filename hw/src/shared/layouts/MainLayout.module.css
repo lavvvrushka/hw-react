@@ -1,41 +1,9 @@
-<<<<<<< HEAD
-.mainLayout {
-=======
 .main-layout {
->>>>>>> hm-2
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-<<<<<<< HEAD
-.mainContent {
-  flex: 1;
-  padding: 20px;
-  background-color: #f5f5f5;
-}
-
-.header {
-  background-color: #ffe3f2;
-  color: #280220;
-  padding: 20px;
-  text-align: center;
-}
-
-.headerTitle {
-  font-size: 28px;
-  margin-bottom: 5px;
-}
-
-.headerSubtitle {
-  font-size: 16px;
-  margin: 0;
-}
-
-.footer {
-  background-color: #333;
-  color: white;
-=======
 .main-content {
   flex: 1;
   padding: 20px;
@@ -51,34 +19,68 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 2rem;
 }
 
 .header-title {
   font-size: 28px;
   margin: 0;
   text-align: left;
+  text-decoration: none;
+  color: inherit;
+}
+
+.header-title h1 {
+  margin: 0;
+}
+
+.headerControls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.navLink:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+:global(body.dark) .navLink {
+  color: #f5f5f5;
+}
+
+:global(body.dark) .navLink:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .footer {
   background: #e6cbd0;
   color: #333;
->>>>>>> hm-2
   padding: 20px;
   text-align: center;
   margin-top: 30px;
 }
 
-<<<<<<< HEAD
-.footerText {
-=======
 .footer-text {
->>>>>>> hm-2
+
   font-size: 16px;
   margin-bottom: 5px;
 }
 
-<<<<<<< HEAD
-=======
 :global(body.dark) .header,
 :global(body.dark) .footer {
   background: #2d3440;
@@ -88,5 +90,5 @@
 :global(body.dark) .footer-text {
   color: #f5f5f5;
 }
->>>>>>> hm-2
+
 

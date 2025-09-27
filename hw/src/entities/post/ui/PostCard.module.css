@@ -1,4 +1,4 @@
-.postCard {
+.post-card {
   border: 2px solid #ccc;
   border-radius: 8px;
   padding: 15px;
@@ -6,19 +6,30 @@
   background: #ede9ea;
 }
 
-.postTitle {
+.post-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-link:hover .post-title {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.post-title {
   color: #333;
   font-size: 18px;
   margin-bottom: 10px;
+  transition: color 0.2s ease;
 }
 
-.postText {
+.post-text {
   color: #666;
   line-height: 1.5;
   margin-bottom: 10px;
 }
 
-.postAuthor {
+.post-author {
   color: #999;
   font-style: italic;
 }

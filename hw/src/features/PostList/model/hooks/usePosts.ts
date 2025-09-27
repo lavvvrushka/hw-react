@@ -18,14 +18,9 @@ export const usePosts = (userId?: number): UsePostsReturn => {
       setError(null);
       
       try {
-        await new Promise(resolve => setTimeout(resolve, 500));
-        
-        let filteredPosts = allPosts;
-      
-        if (userId) {
-          filteredPosts = allPosts;
-        }
-        
+        const filteredPosts = userId
+          ? allPosts.filter((p) => p.userId === userId)
+          : allPosts;
         setPosts(filteredPosts);
       } catch (_err) {
         setError('Ошибка при загрузке постов');

@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../../../app/providers/user/UserContext';
+import { UserContext } from '../../../app/providers/user/userContextApi';
 import type { User } from '../../../entities/user/model/slice/userSlice';
 import styles from './UserAvatar.module.css';
 

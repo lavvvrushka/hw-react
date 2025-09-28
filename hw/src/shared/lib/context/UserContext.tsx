@@ -1,13 +1,7 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { useState } from 'react';
 import type { ReactNode } from 'react';
 import type { User } from '../../../lib/mocks/users';
-
-interface UserContextType {
-  currentUser: User | null;
-  setCurrentUser: (user: User | null) => void;
-}
-
-const UserContext = createContext<UserContextType | undefined>(undefined);
+import { UserContext } from './userContext';
 
 interface UserProviderProps {
   children: ReactNode;
@@ -21,14 +15,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       {children}
     </UserContext.Provider>
   );
-};
-
-export const useUser = () => {
-  const context = useContext(UserContext);
-  if (context === undefined) {
-    throw new Error('useUser must be used within a UserProvider');
-  }
-  return context;
 };
 
 export default UserProvider;

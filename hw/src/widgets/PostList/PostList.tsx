@@ -8,11 +8,11 @@ interface PostListProps {
 }
 
 function PostList({ posts }: PostListProps) {
+  const { data: allComments = [], isLoading, isError } = useGetCommentsQuery();
+
   if (posts.length === 0) {
     return <div>Нет постов для отображения</div>;
   }
-
-  const { data: allComments = [], isLoading, isError } = useGetCommentsQuery();
 
   const commentsByPostId = allComments.reduce<Record<number, Comment[]>>((acc, c) => {
     (acc[c.postId] ||= []).push(c);

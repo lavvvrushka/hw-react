@@ -1,17 +1,8 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { useGetUsersQuery } from '../../../entities/user/api/usersApi';
 import type { User } from '../../../entities/user/model/slice/userSlice';
-
-interface UserContextType {
-  currentUser: User | null;
-  setCurrentUser: (user: User) => void;
-  users: User[];
-  isLoading: boolean;
-  isError: boolean;
-}
-
-export const UserContext = createContext<UserContextType | undefined>(undefined);
+import { UserContext } from './userContextApi';
 
 interface UserProviderProps {
   children: ReactNode;
@@ -43,13 +34,4 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     </UserContext.Provider>
   );
 };
-
-export function useUser() {
-  const context = useContext(UserContext);
-  if (context === undefined) {
-    throw new Error('useUser must be used within a UserProvider');
-  }
-  return context;
-}
-
 export default UserProvider;

@@ -1,4 +1,4 @@
-import { useUser } from '../../../app/providers/user/UserContext';
+import { useUser } from '../../../app/providers/user/userContextApi';
 import type { User } from '../../../entities/user/model/slice/userSlice';
 import styles from './UserSwitcher.module.css';
 

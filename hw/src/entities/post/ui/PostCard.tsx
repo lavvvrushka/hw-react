@@ -4,7 +4,7 @@ import { CommentList } from '../../../widgets/CommentList/ui/CommentList';
 import type { Comment } from '../../comment/api/commentsApi';
 import type { Post } from '../model/types/post';
 
-function PostCard({ post, comments }: { post: Post; comments: Comment[] }) {
+function PostCard({ post, comments }: { post: Post; comments?: Comment[] }) {
   return (
     <article className={styles['post-card']}>
       <Link to={`/posts/${post.id}`} className={styles['post-link']}>
@@ -12,7 +12,7 @@ function PostCard({ post, comments }: { post: Post; comments: Comment[] }) {
       </Link>
       <p className={styles['post-text']}>{post.body}</p>
       <p className={styles['post-author']}>Автор ID: {post.userId}</p>
-      <CommentList comments={comments} />
+      {comments && <CommentList comments={comments} />}
     </article>
   )
 }

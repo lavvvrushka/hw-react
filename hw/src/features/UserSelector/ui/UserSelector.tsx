@@ -1,6 +1,6 @@
 import React from 'react';
 import { users } from '../../../lib/mocks/users';
-import { useUser } from '../../../shared/lib/context/UserContext';
+import { useUser } from '../../../shared/lib/context/userContext';
 import styles from './UserSelector.module.css';
 
 export const UserSelector: React.FC = () => {

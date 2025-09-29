@@ -1,25 +1,36 @@
-import * as React from 'react'
-import { PostCard } from '../../entities/post/ui/PostCard'
-import { type Post } from '../../lib/mocks/posts'
-import styles from './PostList.module.css'
+import { PostCard } from '../../entities/post/ui/PostCard';
+import styles from './PostList.module.css';
+import type { Post } from '../../entities/post/model/types/post';
+import { useGetCommentsQuery, type Comment } from '../../entities/comment/api/commentsApi';
 
-type Props = {
-  posts: Post[]
+interface PostListProps {
+  posts: Post[];
 }
 
-function PostList({ posts }: Props) {
+function PostList({ posts }: PostListProps) {
+  const { data: allComments = [], isLoading, isError } = useGetCommentsQuery();
+
+  if (posts.length === 0) {
+    return <div>Нет постов для отображения</div>;
+  }
+
+  const commentsByPostId = allComments.reduce<Record<number, Comment[]>>((acc, c) => {
+    (acc[c.postId] ||= []).push(c);
+    return acc;
+  }, {});
+
   return (
     <div className={styles['post-list']}>
-      <h2 className={styles['post-list-title']}>Весь список</h2>
       <div className={styles['post-container']}>
+        {isLoading && <div>Загрузка комментариев...</div>}
+        {isError && <div>Ошибка загрузки комментариев</div>}
         {posts.map((post) => (
-          <React.Fragment key={post.id}>
-            <PostCard post={post} />
-          </React.Fragment>
+          <PostCard key={post.id} post={post} comments={commentsByPostId[post.id] || []} />
         ))}
       </div>
     </div>
-  )
+  );
 }
 
-export { PostList }
+export { PostList };
+export type { PostListProps };

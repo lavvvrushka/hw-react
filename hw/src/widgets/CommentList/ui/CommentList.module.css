@@ -1,0 +1,44 @@
+.comment-list-container {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.toggle-btn {
+  margin-bottom: 10px;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 4px;
+  background: #e0e0e0;
+  color: #333;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.toggle-btn:hover {
+  background: #d1d1d1;
+}
+
+.comment-list {
+  list-style: disc inside;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.comment-list li {
+  margin-bottom: 6px;
+  color: #444;
+}
+
+:global(body.dark) .comment-list-container {
+  background: #232936;
+}
+:global(body.dark) .toggle-btn {
+  background: #444;
+  color: #f5f5f5;
+}
+:global(body.dark) .comment-list li {
+  color: #f5f5f5;
+}
